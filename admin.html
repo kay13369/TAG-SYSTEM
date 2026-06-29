@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard · TAG</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="app-body">
+
+  <!-- Looping tech background -->
+  <div class="bg-loop" aria-hidden="true">
+    <div class="bg-loop__slide s1"></div>
+    <div class="bg-loop__slide s2"></div>
+    <div class="bg-loop__slide s3"></div>
+    <div class="bg-loop__slide s4"></div>
+    <div class="bg-loop__veil"></div>
+  </div>
+
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="brand brand--stack" aria-label="Technology Affiliates Group — home">
+        <img class="brand__logo" src="assets/tag-logo-dark.png" alt="Technology Affiliates Group" />
+        <small>Admin Console</small>
+      </a>
+      <nav class="sidebar__nav" id="sideNav">
+        <a href="#" data-view="dashboard" class="active"><span class="ic">📊</span> Overview</a>
+        <a href="#" data-view="tickets"><span class="ic">🎫</span> Tickets</a>
+        <a href="#" data-view="quotes"><span class="ic">📄</span> Quotes</a>
+        <a href="#" data-view="inquiries"><span class="ic">✉️</span> Inquiries</a>
+        <a href="#" data-view="clients"><span class="ic">🏢</span> Clients</a>
+      </nav>
+      <div class="sidebar__user">
+        <div class="who">
+          <div class="avatar" id="userAvatar">?</div>
+          <div><div class="nm" id="userName">—</div><div class="rl">Administrator</div></div>
+        </div>
+        <button class="btn btn-light btn-sm btn-block" id="resetBtn" style="margin-bottom:8px">↺ Reset demo data</button>
+        <button class="btn btn-light btn-sm btn-block" id="logoutBtn">Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button class="btn btn-ghost btn-sm" id="menuBtn" style="display:none">☰</button>
+          <div><h1 id="pageTitle">Overview</h1><div class="sub" id="pageSub">Operations at a glance</div></div>
+        </div>
+      </div>
+      <div class="content" id="content"></div>
+    </main>
+  </div>
+
+  <script src="js/db.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
