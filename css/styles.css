@@ -311,6 +311,7 @@ h1, h2, h3, h4 { line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; c
 
 /* Stat cards */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+.stats--3 { grid-template-columns: repeat(3, 1fr); }
 .stat { background: #fff; border: 1px solid var(--slate-200); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); }
 .stat__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .stat__icon { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; font-size: 19px; }
@@ -420,7 +421,7 @@ h1, h2, h3, h4 { line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; c
   .hero__inner, .split, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .grid--4 { grid-template-columns: repeat(2, 1fr); }
   .grid--3, .steps { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats, .stats--3 { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   .detail-grid { grid-template-columns: 1fr; }
   .auth { grid-template-columns: 1fr; }
@@ -433,7 +434,7 @@ h1, h2, h3, h4 { line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; c
   .nav.open .nav__links { display: flex; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 24px; gap: 16px; border-bottom: 1px solid var(--slate-200); box-shadow: var(--shadow-md); }
 }
 @media (max-width: 560px) {
-  .grid--4, .grid--2, .stats, .field-row { grid-template-columns: 1fr; }
+  .grid--4, .grid--2, .stats, .stats--3, .field-row { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr; }
   .section { padding: 60px 0; }
   .hero__stats { gap: 22px; }
@@ -949,6 +950,22 @@ body, body.app-body, body.auth-page {
 .pw-meter[data-score="4"] .pw-meter__label { color: #86efac; }
 
 /* ============================================================
+   TABLETS & PHONES  ·  ≤ 768px  (dashboards: tables, drawer)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Wide tables scroll horizontally inside their panel instead of
+     being clipped/cut off. Overrides the panel's overflow:hidden. */
+  .panel { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .table { min-width: 600px; }
+
+  /* Off-canvas sidebar gets a dimming backdrop when open */
+  .sidebar.open::after {
+    content: ""; position: fixed; top: 0; left: 264px; width: 100vw; height: 100vh;
+    background: rgba(4, 9, 18, 0.55); z-index: -1;
+  }
+}
+
+/* ============================================================
    SMALL PHONES  ·  ≤ 475px
    ============================================================ */
 @media (max-width: 475px) {
@@ -1002,13 +1019,8 @@ body, body.app-body, body.auth-page {
   .content { padding: 22px 14px 44px; }
   .topbar { padding: 13px 14px; }
   .topbar h1 { font-size: 19px; }
-  .stats { grid-template-columns: 1fr !important; } /* beats inline 3-col on admin */
   .sidebar { width: 86vw; max-width: 320px; }
   .detail-grid { grid-template-columns: 1fr; }
-
-  /* tables scroll horizontally instead of breaking the layout */
-  .panel { overflow-x: auto; }
-  .table { min-width: 460px; }
   .table th, .table td { padding: 12px 14px; }
 
   /* ---- auth card ---- */

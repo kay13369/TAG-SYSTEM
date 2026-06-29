@@ -17,6 +17,12 @@
 
   const sidebar = $("#sidebar");
   $("#menuBtn").addEventListener("click", () => sidebar.classList.toggle("open"));
+  // tap outside the drawer to close it on mobile
+  document.addEventListener("click", (e) => {
+    if (sidebar.classList.contains("open") && !sidebar.contains(e.target) && !e.target.closest("#menuBtn")) {
+      sidebar.classList.remove("open");
+    }
+  });
 
   const content = $("#content");
   const pageTitle = $("#pageTitle");

@@ -21,6 +21,12 @@
 
   const sidebar = $("#sidebar");
   $("#menuBtn").addEventListener("click", () => sidebar.classList.toggle("open"));
+  // tap outside the drawer to close it on mobile
+  document.addEventListener("click", (e) => {
+    if (sidebar.classList.contains("open") && !sidebar.contains(e.target) && !e.target.closest("#menuBtn")) {
+      sidebar.classList.remove("open");
+    }
+  });
   const content = $("#content");
   const pageTitle = $("#pageTitle");
   const pageSub = $("#pageSub");
@@ -85,7 +91,7 @@
         ${statCard("tone-cyan", "📄", newQuotes.length, "Quotes to action")}
         ${statCard("tone-blue", "✉️", unread.length, "Unread inquiries")}
       </div>
-      <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stats stats--3">
         ${statCard("tone-green", "✓", tickets.filter((t)=>t.status==="resolved"||t.status==="closed").length, "Resolved tickets")}
         ${statCard("tone-purple", "🏢", clients.length, "Active clients")}
         ${statCard("tone-blue", "📊", tickets.length, "Tickets all-time")}
