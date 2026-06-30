@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
 </head>
 <body>
 
@@ -45,49 +45,62 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="fx-hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="container hero__inner">
-      <div>
-        <span class="eyebrow">Trusted IT Partner in Gaborone</span>
-        <h1>Technology that <span class="grad">works as hard</span> as your business does.</h1>
+      <div class="hero__text" data-reveal>
+        <span class="live-pill"><span class="live-dot"></span> All systems operational</span>
+        <h1 style="margin-top:18px">Technology that<br /><span class="grad" data-typewriter='["works as hard as you do.","never sleeps.","scales as you grow.","keeps you secure."]'>works as hard as you do.</span></h1>
         <p>From infrastructure and cybersecurity to cloud and smart systems — TAG designs, deploys, and supports tailored IT solutions for organisations across Botswana.</p>
         <div class="hero__cta">
           <a href="#contact" class="btn btn-primary">Request a Consultation →</a>
           <a href="#services" class="btn btn-light">Explore Services</a>
         </div>
-        <div class="hero__stats">
-          <div><div class="num">&lt; 24h</div><div class="lbl">Response time</div></div>
-          <div><div class="num">8+</div><div class="lbl">Service areas</div></div>
-          <div><div class="num">24/7</div><div class="lbl">Emergency line</div></div>
+        <div class="hero__metrics">
+          <div><div class="metric__num" data-count="250" data-suffix="+">0</div><div class="metric__lbl">Projects delivered</div></div>
+          <div><div class="metric__num" data-count="99.9" data-decimals="1" data-suffix="%">0</div><div class="metric__lbl">Uptime maintained</div></div>
+          <div><div class="metric__num" data-count="24" data-suffix="/7">0</div><div class="metric__lbl">Proactive monitoring</div></div>
         </div>
       </div>
-      <div class="hero__card">
-        <h4>Live Support Snapshot</h4>
-        <p class="sub">What we handle for clients every day</p>
-        <div class="mini-row">
-          <div class="mini-row__icon">🛡️</div>
-          <div class="mini-row__txt"><b>Threat blocked</b><span>Phishing domain quarantined</span></div>
-          <span class="badge badge--resolved">Resolved</span>
-        </div>
-        <div class="mini-row">
-          <div class="mini-row__icon">☁️</div>
-          <div class="mini-row__txt"><b>Microsoft 365</b><span>5 mailboxes provisioned</span></div>
-          <span class="badge badge--in-progress">Active</span>
-        </div>
-        <div class="mini-row">
-          <div class="mini-row__icon">📶</div>
-          <div class="mini-row__txt"><b>Network survey</b><span>Warehouse coverage fix</span></div>
-          <span class="badge badge--in-progress">On site</span>
+
+      <div class="hero__visual" data-reveal data-reveal-delay="150">
+        <div class="console-card" data-tilt>
+          <div class="console-card__head">
+            <h4>Live Operations</h4>
+            <span class="console-card__dots"><i></i><i></i><i></i></span>
+          </div>
+          <p class="sub">Real-time view of what we handle for clients</p>
+          <canvas id="fx-spark" class="console-card__spark" aria-hidden="true"></canvas>
+          <div class="mini-row">
+            <div class="mini-row__icon">🛡️</div>
+            <div class="mini-row__txt"><b>Threat blocked</b><span>Phishing domain quarantined</span></div>
+            <span class="badge badge--resolved">Resolved</span>
+          </div>
+          <div class="mini-row">
+            <div class="mini-row__icon">☁️</div>
+            <div class="mini-row__txt"><b>Microsoft 365</b><span>5 mailboxes provisioned</span></div>
+            <span class="badge badge--in-progress">Active</span>
+          </div>
+          <div class="mini-row" style="margin-bottom:0">
+            <div class="mini-row__icon">📶</div>
+            <div class="mini-row__txt"><b>Network survey</b><span>Warehouse coverage fix</span></div>
+            <span class="badge badge--in-progress">On site</span>
+          </div>
         </div>
       </div>
     </div>
+    <a href="#services" class="hero__scroll" aria-label="Scroll down"></a>
   </section>
 
-  <!-- TRUST BAR -->
+  <!-- LIVE OPS TICKER -->
+  <div class="fx-ticker" id="fx-ticker" aria-hidden="true"></div>
+
+  <!-- PARTNERS (marquee) -->
   <section class="trustbar" id="partners">
-    <div class="container trustbar__inner">
-      <p>Powered by world-class vendors</p>
-      <ul>
-        <li>HPE</li><li>Microsoft</li><li>Adobe</li><li>Kaspersky</li><li>Azure</li>
+    <div class="container" style="padding-bottom:18px"><p>Powered by world-class vendors</p></div>
+    <div class="marquee">
+      <ul class="marquee__track">
+        <li>HPE</li><li>·</li><li>Microsoft</li><li>·</li><li>Adobe</li><li>·</li><li>Kaspersky</li><li>·</li><li>Azure</li><li>·</li>
+        <li>HPE</li><li>·</li><li>Microsoft</li><li>·</li><li>Adobe</li><li>·</li><li>Kaspersky</li><li>·</li><li>Azure</li><li>·</li>
       </ul>
     </div>
   </section>
@@ -95,60 +108,28 @@
   <!-- SERVICES -->
   <section class="section" id="services">
     <div class="container">
-      <div class="center">
+      <div class="center" data-reveal>
         <span class="eyebrow">What we do</span>
         <h2 class="section-title">Comprehensive IT solutions, end to end</h2>
         <p class="section-lead">We don't sell off-the-shelf packages. Every engagement is scoped to your environment, your risks, and your goals.</p>
       </div>
       <div class="grid grid--4" style="margin-top:48px">
-        <div class="card service-card">
-          <div class="service-card__icon">🖥️</div>
-          <h3>IT Infrastructure & Support</h3>
-          <p>Networks, servers, and end-user support that keeps your team productive and your systems online.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">🛡️</div>
-          <h3>Cybersecurity</h3>
-          <p>Threat protection, endpoint security, and proactive monitoring to keep your data safe.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">⚙️</div>
-          <h3>System Development</h3>
-          <p>Custom software and business applications built around how you actually work.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">☁️</div>
-          <h3>Cloud & Microsoft 365</h3>
-          <p>Azure and Microsoft 365 deployment, migration, and licensing — done right the first time.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">🔐</div>
-          <h3>Security & Access Control</h3>
-          <p>Biometric access, CCTV, and physical security systems integrated with your IT.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">🎥</div>
-          <h3>Audio & Video Conferencing</h3>
-          <p>Boardroom and hybrid-meeting setups that just work, every time.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">📡</div>
-          <h3>IoT & Smart Technologies</h3>
-          <p>Connected sensors and smart systems that bring real-time visibility to your operations.</p>
-        </div>
-        <div class="card service-card">
-          <div class="service-card__icon">💾</div>
-          <h3>Backup & Recovery</h3>
-          <p>Automated backups and tested recovery plans so a disaster never becomes a catastrophe.</p>
-        </div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="0"><div class="service-card__icon">🖥️</div><h3>IT Infrastructure & Support</h3><p>Networks, servers, and end-user support that keeps your team productive and your systems online.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="60"><div class="service-card__icon">🛡️</div><h3>Cybersecurity</h3><p>Threat protection, endpoint security, and proactive monitoring to keep your data safe.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="120"><div class="service-card__icon">⚙️</div><h3>System Development</h3><p>Custom software and business applications built around how you actually work.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="180"><div class="service-card__icon">☁️</div><h3>Cloud & Microsoft 365</h3><p>Azure and Microsoft 365 deployment, migration, and licensing — done right the first time.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="0"><div class="service-card__icon">🔐</div><h3>Security & Access Control</h3><p>Biometric access, CCTV, and physical security systems integrated with your IT.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="60"><div class="service-card__icon">🎥</div><h3>Audio & Video Conferencing</h3><p>Boardroom and hybrid-meeting setups that just work, every time.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="120"><div class="service-card__icon">📡</div><h3>IoT & Smart Technologies</h3><p>Connected sensors and smart systems that bring real-time visibility to your operations.</p></div>
+        <div class="card service-card" data-tilt data-reveal data-reveal-delay="180"><div class="service-card__icon">💾</div><h3>Backup & Recovery</h3><p>Automated backups and tested recovery plans so a disaster never becomes a catastrophe.</p></div>
       </div>
     </div>
   </section>
 
   <!-- WHY TAG -->
-  <section class="section" id="why" style="background:var(--slate-50)">
+  <section class="section" id="why">
     <div class="container split">
-      <div>
+      <div data-reveal>
         <span class="eyebrow">Why choose TAG</span>
         <h2 class="section-title">A partner, not just a provider</h2>
         <p class="section-lead">We become an extension of your team — responsive, accountable, and invested in your uptime.</p>
@@ -159,7 +140,7 @@
           <li><span class="tick">✓</span><div><b>Local, on the ground</b><span>Based in the Gaborone CBD — on site when you need us.</span></div></li>
         </ul>
       </div>
-      <div class="panel-dark">
+      <div class="panel-dark" data-reveal data-reveal-delay="120" data-tilt>
         <span class="eyebrow" style="color:var(--cyan-300)">Client portal included</span>
         <h3 style="font-size:26px;margin:14px 0 10px">Manage everything in one place</h3>
         <p style="color:rgba(255,255,255,.8)">Every TAG client gets a secure portal to log support tickets, track progress in real time, and request quotes — no phone tag required.</p>
@@ -174,15 +155,15 @@
   <!-- PROCESS -->
   <section class="section" id="process">
     <div class="container">
-      <div class="center">
+      <div class="center" data-reveal>
         <span class="eyebrow">How it works</span>
         <h2 class="section-title">Three steps to a solution</h2>
         <p class="section-lead">Simple, transparent, and built to get you to a working result fast.</p>
       </div>
       <div class="steps" style="margin-top:48px">
-        <div class="step"><div class="step__num"></div><h3>Get in touch</h3><p>Tell us what you need through the portal, the contact form, or our emergency line. We respond in under 24 hours.</p></div>
-        <div class="step"><div class="step__num"></div><h3>Consult & scope</h3><p>We assess your environment and design a solution tailored to your needs, risks, and budget — then quote it clearly.</p></div>
-        <div class="step"><div class="step__num"></div><h3>Deploy & support</h3><p>We implement, hand over, and stay on as your ongoing IT partner — with the portal keeping everything tracked.</p></div>
+        <div class="step" data-reveal data-reveal-delay="0"><div class="step__num"></div><h3>Get in touch</h3><p>Tell us what you need through the portal, the contact form, or our emergency line. We respond in under 24 hours.</p></div>
+        <div class="step" data-reveal data-reveal-delay="120"><div class="step__num"></div><h3>Consult & scope</h3><p>We assess your environment and design a solution tailored to your needs, risks, and budget — then quote it clearly.</p></div>
+        <div class="step" data-reveal data-reveal-delay="240"><div class="step__num"></div><h3>Deploy & support</h3><p>We implement, hand over, and stay on as your ongoing IT partner — with the portal keeping everything tracked.</p></div>
       </div>
     </div>
   </section>
@@ -190,7 +171,7 @@
   <!-- CTA -->
   <section class="section--tight">
     <div class="container">
-      <div class="cta">
+      <div class="cta" data-reveal>
         <h2>Got an IT challenge? Let's solve it.</h2>
         <p>Whether it's a quick fix or a full rollout, our engineers are ready. Tell us what you need and we'll be in touch within 24 hours.</p>
         <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
@@ -202,15 +183,15 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="section" id="contact" style="background:var(--slate-50)">
+  <section class="section" id="contact">
     <div class="container">
-      <div class="center" style="margin-bottom:48px">
+      <div class="center" style="margin-bottom:48px" data-reveal>
         <span class="eyebrow">Get in touch</span>
         <h2 class="section-title">Let's talk about your project</h2>
         <p class="section-lead">Send us a message and a TAG specialist will get back to you. Already a client? Use the portal for faster service.</p>
       </div>
       <div class="contact-grid">
-        <div>
+        <div data-reveal>
           <ul class="contact-info">
             <li><div class="ci-icon">📍</div><div><b>Visit us</b><span>Plot 54368, Western Commercial Road,<br />Gaborone CBD, Botswana</span></div></li>
             <li><div class="ci-icon">📞</div><div><b>Emergency line</b><span>(+267) 398-1932</span></div></li>
@@ -218,7 +199,7 @@
             <li><div class="ci-icon">🕐</div><div><b>Office hours</b><span>Mon–Fri · 8:00 AM – 5:00 PM</span></div></li>
           </ul>
         </div>
-        <form class="form-card" id="contactForm" novalidate>
+        <form class="form-card" id="contactForm" novalidate data-reveal data-reveal-delay="120">
           <div class="field-row">
             <div class="field"><label for="cName">Full name</label><input id="cName" name="name" type="text" placeholder="Your name" /><div class="err">Please enter your name.</div></div>
             <div class="field"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" placeholder="you@company.com" /><div class="err">Enter a valid email.</div></div>
@@ -263,13 +244,14 @@
       </div>
       <div class="footer__bottom">
         <span>© <span id="year"></span> Technology Affiliates Group. All rights reserved.</span>
-        <span>Built for tag.co.bw · Demo system</span>
+        <span>Built for tag.co.bw</span>
       </div>
     </div>
   </footer>
 
-  <script src="js/db.js?v=2"></script>
-  <script src="js/ui.js?v=2"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/db.js?v=4"></script>
+  <script src="js/ui.js?v=4"></script>
+  <script src="js/fx.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

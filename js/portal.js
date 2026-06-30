@@ -50,6 +50,7 @@
       profile: renderProfile,
       ticket: renderTicketDetail,
     }[view] || renderDashboard)(arg);
+    if (window.FX) FX.scan(content);
   }
 
   $$("#sideNav a").forEach((a) =>
@@ -59,7 +60,7 @@
   // ---- Views ----
   function statCard(tone, icon, num, lbl) {
     return `<div class="stat"><div class="stat__top"><div class="stat__icon ${tone}">${icon}</div></div>
-      <div class="num">${num}</div><div class="lbl">${lbl}</div></div>`;
+      <div class="num" data-count="${num}">${num}</div><div class="lbl">${lbl}</div></div>`;
   }
 
   function renderDashboard() {
