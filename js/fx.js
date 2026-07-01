@@ -261,7 +261,7 @@
 
   function init() {
     scan(document);
-    cursorGlow();
+    // cursorGlow();  // disabled — no mouse-follow glow
     typewriter();
     particles();
     sparkline();
