@@ -1139,3 +1139,22 @@ body, body.app-body, body.auth-page {
   .steps::before { display: none; }
   .cursor-glow { display: none; }
 }
+
+/* ============================================================
+   ABOUT · Vision/Mission · Values · Socials
+   ============================================================ */
+.values { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.values span { padding: 8px 15px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--cyan-300); background: rgba(0,194,203,0.08); border: 1px solid rgba(0,194,203,0.22); }
+
+.vmv { display: grid; gap: 18px; }
+.vmv__card { position: relative; }
+.vmv__icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; margin-bottom: 14px; background: linear-gradient(135deg, rgba(0,194,203,.14), rgba(37,99,235,.14)); }
+.vmv__card h3 { font-size: 19px; margin-bottom: 8px; }
+.vmv__card p { font-size: 14.5px; color: var(--soft-on-dark); }
+
+.socials { display: flex; gap: 12px; }
+.socials a { width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--soft-on-dark); transition: transform .15s, background .15s, color .15s, border-color .15s; }
+.socials a:hover { color: #fff; background: var(--grad-accent); border-color: transparent; transform: translateY(-3px); }
+.socials svg { width: 18px; height: 18px; fill: currentColor; display: block; }
+.footer .socials { margin-top: 16px; }
+.contact-info li a { color: var(--cyan-300); font-weight: 600; }
