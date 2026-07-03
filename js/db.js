@@ -11,6 +11,8 @@
     tickets: "tag_tickets",
     quotes: "tag_quotes",
     inquiries: "tag_inquiries",
+    orders: "tag_orders",
+    cart: "tag_cart",
     session: "tag_session",
     seeded: "tag_seeded_v1",
   };
@@ -261,6 +263,52 @@
     },
   };
 
+  /* ---------- shopping cart (localStorage) ---------- */
+  const Cart = {
+    all: () => read(KEYS.cart, []),
+    count: () => Cart.all().reduce((s, i) => s + i.qty, 0),
+    total: () => Cart.all().reduce((s, i) => s + i.price * i.qty, 0),
+    add(product) {
+      const c = Cart.all();
+      const ex = c.find((i) => i.id === product.id);
+      if (ex) ex.qty += 1;
+      else c.push({ id: product.id, name: product.name, price: product.price, icon: product.icon || "📦", qty: 1 });
+      write(KEYS.cart, c);
+      return c;
+    },
+    setQty(id, qty) {
+      let c = Cart.all();
+      if (qty <= 0) c = c.filter((i) => i.id !== id);
+      else { const it = c.find((i) => i.id === id); if (it) it.qty = qty; }
+      write(KEYS.cart, c);
+      return c;
+    },
+    remove(id) { return Cart.setQty(id, 0); },
+    clear() { write(KEYS.cart, []); },
+  };
+
+  /* ---------- orders ---------- */
+  const Orders = {
+    all: () => read(KEYS.orders, []),
+    byUser: (userId) => Orders.all().filter((o) => o.userId === userId),
+    byId: (id) => Orders.all().find((o) => o.id === id) || null,
+    create(data) {
+      const list = Orders.all();
+      const order = { id: uid("ord"), status: "new", createdAt: now(), ...data };
+      list.unshift(order);
+      write(KEYS.orders, list);
+      return order;
+    },
+    update(id, changes) {
+      const list = Orders.all();
+      const idx = list.findIndex((o) => o.id === id);
+      if (idx === -1) return null;
+      list[idx] = { ...list[idx], ...changes };
+      write(KEYS.orders, list);
+      return list[idx];
+    },
+  };
+
   /* ---------- auth / session ---------- */
   const Auth = {
     login(email, password) {
@@ -303,6 +351,8 @@
     Tickets,
     Quotes,
     Inquiries,
+    Cart,
+    Orders,
     Auth,
     uid,
     now,

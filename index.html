@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=6" />
+  <link rel="stylesheet" href="css/styles.css?v=7" />
 </head>
 <body>
 
@@ -29,13 +29,14 @@
         <img class="brand__logo" src="assets/tag-logo-dark.png" alt="Technology Affiliates Group" />
       </a>
       <nav class="nav__links">
-        <a href="#about">About</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
         <a href="#services">Services</a>
-        <a href="#why">Why TAG</a>
-        <a href="#process">Process</a>
+        <a href="shop.html">Shop</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav__actions">
+        <a href="shop.html" class="nav-cart" aria-label="Cart">🛒<span class="nav-cart__badge" id="cartBadge">0</span></a>
         <a href="login.html" class="btn btn-ghost btn-sm">Client Login</a>
         <a href="#contact" class="btn btn-primary btn-sm">Get a Quote</a>
       </div>
@@ -223,7 +224,7 @@
             <li><div class="ci-icon">📞</div><div><b>Phone</b><span>(+267) 398-1932</span></div></li>
             <li><div class="ci-icon">✉️</div><div><b>Email</b><span><a href="mailto:admin@tag.co.bw">admin@tag.co.bw</a></span></div></li>
             <li><div class="ci-icon">🌐</div><div><b>Website</b><span><a href="https://www.tag.co.bw" target="_blank" rel="noopener">www.tag.co.bw</a></span></div></li>
-            <li><div class="ci-icon">🕐</div><div><b>Office hours</b><span>Mon–Fri · 8:00 AM – 5:00 PM</span></div></li>
+            <li><div class="ci-icon">🕐</div><div><b>Operating hours</b><span>Mon–Fri · 8:00 AM – 5:00 PM<br />Sat · 8:00 AM – 1:00 PM<br />Sun & public holidays · Closed</span></div></li>
           </ul>
           <div style="margin-top:22px">
             <b style="display:block;font-size:14px;margin-bottom:12px">Follow us</b>
@@ -245,6 +246,10 @@
           <button type="submit" class="btn btn-primary btn-block">Send Message</button>
           <p class="hint" style="text-align:center;margin-top:12px">Typical response time: under 24 hours.</p>
         </form>
+      </div>
+      <div class="map-wrap" data-reveal>
+        <iframe class="map-embed" src="https://www.openstreetmap.org/export/embed.html?bbox=25.8996878%2C-24.6523954%2C25.9116878%2C-24.6443954&layer=mapnik&marker=-24.6483954%2C25.9056878" loading="lazy" title="TAG office location map"></iframe>
+        <div style="padding:12px 16px;text-align:center"><a href="https://maps.app.goo.gl/aerVuK5NGFTVQcWi7" target="_blank" rel="noopener" class="pill-link">Open in Google Maps →</a></div>
       </div>
     </div>
   </section>
@@ -272,9 +277,9 @@
         </div>
         <div>
           <h5>Company</h5>
-          <a href="#about">About TAG</a>
+          <a href="about.html">About TAG</a>
+          <a href="shop.html">Shop</a>
           <a href="#why">Why Choose Us</a>
-          <a href="#process">Our Process</a>
           <a href="login.html">Client Portal</a>
         </div>
         <div>
@@ -292,9 +297,9 @@
     </div>
   </footer>
 
-  <script src="js/db.js?v=4"></script>
-  <script src="js/ui.js?v=4"></script>
-  <script src="js/fx.js?v=5"></script>
-  <script src="js/main.js?v=4"></script>
+  <script src="js/db.js?v=7"></script>
+  <script src="js/ui.js?v=7"></script>
+  <script src="js/fx.js?v=7"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>

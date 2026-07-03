@@ -35,6 +35,7 @@
     dashboard: ["Overview", "Operations at a glance"],
     tickets: ["Tickets", "Every client support request"],
     quotes: ["Quotes", "Manage quote requests"],
+    orders: ["Orders", "Shop orders from clients & guests"],
     inquiries: ["Inquiries", "Messages from the website contact form"],
     clients: ["Clients", "Registered client accounts"],
   };
@@ -50,6 +51,7 @@
       dashboard: renderDashboard,
       tickets: renderTickets,
       quotes: renderQuotes,
+      orders: renderOrders,
       inquiries: renderInquiries,
       clients: renderClients,
       ticket: renderTicketDetail,
@@ -263,6 +265,35 @@
       sel.addEventListener("change", () => {
         TAGDB.Quotes.update(sel.dataset.id, { status: sel.value });
         toast("Quote status updated.", "success");
+      })
+    );
+  }
+
+  // ---- Orders ----
+  function renderOrders() {
+    const orders = TAGDB.Orders.all().slice().sort(byNewest);
+    const statuses = ["new", "processing", "fulfilled", "cancelled"];
+    const money = (n) => "P" + Number(n).toLocaleString("en-US");
+    content.innerHTML = `
+      <div class="panel">
+        <div class="panel__head"><h3>Shop orders</h3></div>
+        ${orders.length ? `
+        <table class="table"><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Placed</th></tr></thead>
+        <tbody>${orders.map((o) => `
+          <tr>
+            <td><div class="t-title">#${o.id.slice(-6)}</div><div class="t-sub">${o.userId ? "Client" : "Guest"}</div></td>
+            <td><div class="t-title" style="font-weight:600">${esc(o.name)}</div><div class="t-sub">${esc(o.company || o.email)}</div></td>
+            <td>${o.items.reduce((s, i) => s + i.qty, 0)} item(s)<div class="t-sub">${truncate(o.items.map((i) => i.name + " ×" + i.qty).join(", "), 52)}</div></td>
+            <td class="t-title">${money(o.total)}</td>
+            <td><select class="order-status" data-id="${o.id}">${statuses.map((s) => `<option value="${s}" ${s === o.status ? "selected" : ""}>${label(s)}</option>`).join("")}</select></td>
+            <td class="text-muted">${fmtDate(o.createdAt)}</td>
+          </tr>`).join("")}
+        </tbody></table>` : emptyState("🛒", "No orders yet", "Orders placed from the shop appear here.")}
+      </div>`;
+    $$(".order-status").forEach((sel) =>
+      sel.addEventListener("change", () => {
+        TAGDB.Orders.update(sel.dataset.id, { status: sel.value });
+        toast("Order status updated.", "success");
       })
     );
   }

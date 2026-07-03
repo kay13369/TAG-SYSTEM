@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Technology Affiliates Group (TAG)</title>
+  <meta name="description" content="Shop IT hardware, software licences, networking, and security products from TAG — Technology Affiliates Group, Gaborone." />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=7" />
+</head>
+<body>
+
+  <div class="bg-loop" aria-hidden="true">
+    <div class="bg-loop__slide s1"></div><div class="bg-loop__slide s2"></div>
+    <div class="bg-loop__slide s3"></div><div class="bg-loop__slide s4"></div>
+    <div class="bg-loop__veil"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="brand" aria-label="Technology Affiliates Group — home">
+        <img class="brand__logo" src="assets/tag-logo-dark.png" alt="Technology Affiliates Group" />
+      </a>
+      <nav class="nav__links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="index.html#services">Services</a>
+        <a href="shop.html">Shop</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="nav-cart" id="cartToggle" aria-label="Open cart">🛒<span class="nav-cart__badge" id="cartBadge">0</span></button>
+        <a href="login.html" class="btn btn-ghost btn-sm">Client Login</a>
+        <a href="index.html#contact" class="btn btn-primary btn-sm">Get a Quote</a>
+      </div>
+      <button class="nav__toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- PAGE HEAD -->
+  <section class="page-head">
+    <div class="container" data-reveal>
+      <span class="eyebrow" style="justify-content:center">TAG Shop</span>
+      <h1>Enterprise IT, ready to order</h1>
+      <p>Hardware, software licences, networking, and security — sourced from our world-class partners and backed by TAG support. Prices in Botswana Pula (BWP).</p>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="shop-filters" id="shopFilters" data-reveal></div>
+      <div class="products" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border-top:0;padding-top:0">
+        <span>© <span id="year"></span> Technology Affiliates Group. All rights reserved.</span>
+        <span><a href="index.html" style="color:var(--cyan-300)">← Back to home</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="cart-drawer__head">
+      <h3>Your Cart</h3>
+      <button class="modal__close" id="cartClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-drawer__body" id="cartBody"></div>
+    <div class="cart-drawer__foot" id="cartFoot"></div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal">
+      <div class="modal__head"><h3>Checkout</h3><button class="modal__close" data-close="checkoutModal">&times;</button></div>
+      <div class="modal__body">
+        <p class="text-muted" style="margin-bottom:18px">Place your order and a TAG specialist will confirm stock, pricing, and delivery within 24 hours.</p>
+        <form id="checkoutForm" novalidate>
+          <div class="field-row">
+            <div class="field"><label for="oName">Full name</label><input id="oName" type="text" placeholder="Your name" /><div class="err">Please enter your name.</div></div>
+            <div class="field"><label for="oPhone">Phone</label><input id="oPhone" type="text" placeholder="+267 …" /><div class="err">Enter a phone number.</div></div>
+          </div>
+          <div class="field"><label for="oEmail">Email</label><input id="oEmail" type="email" placeholder="you@company.com" /><div class="err">Enter a valid email.</div></div>
+          <div class="field"><label for="oCompany">Company (optional)</label><input id="oCompany" type="text" placeholder="Your organisation" /></div>
+          <div class="field"><label for="oNotes">Order notes (optional)</label><textarea id="oNotes" placeholder="Delivery address, quantities, questions…"></textarea></div>
+          <div class="cart-total" style="margin:6px 0 16px"><span class="lbl">Order total</span><span class="val" id="checkoutTotal">P0</span></div>
+          <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/db.js?v=7"></script>
+  <script src="js/ui.js?v=7"></script>
+  <script src="js/fx.js?v=7"></script>
+  <script src="js/main.js?v=7"></script>
+  <script src="js/shop.js?v=7"></script>
+</body>
+</html>

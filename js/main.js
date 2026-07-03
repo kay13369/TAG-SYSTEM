@@ -9,6 +9,16 @@
   const yr = $("#year");
   if (yr) yr.textContent = new Date().getFullYear();
 
+  // Nav cart badge — reflects the localStorage cart count on public pages
+  window.updateCartBadge = function () {
+    const badge = document.getElementById("cartBadge");
+    if (!badge || !window.TAGDB) return;
+    const n = TAGDB.Cart.count();
+    badge.textContent = n;
+    badge.style.display = n > 0 ? "grid" : "none";
+  };
+  window.updateCartBadge();
+
   // Mobile nav toggle
   const nav = $("#nav");
   const toggle = $("#navToggle");
