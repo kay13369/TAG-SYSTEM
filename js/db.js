@@ -272,7 +272,7 @@
       const c = Cart.all();
       const ex = c.find((i) => i.id === product.id);
       if (ex) ex.qty += 1;
-      else c.push({ id: product.id, name: product.name, price: product.price, icon: product.icon || "📦", qty: 1 });
+      else c.push({ id: product.id, name: product.name, price: product.price, icon: product.icon || "📦", img: product.img || null, qty: 1 });
       write(KEYS.cart, c);
       return c;
     },

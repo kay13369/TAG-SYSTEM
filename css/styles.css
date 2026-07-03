@@ -1230,3 +1230,9 @@ body, body.app-body, body.auth-page {
   .cart-drawer { width: 100vw; max-width: 100vw; }
   .page-head { padding: 100px 0 30px; }
 }
+
+/* Shop product & cart images */
+.product__media { overflow: hidden; padding: 0; }
+.product__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cart-line__icon { overflow: hidden; padding: 0; }
+.cart-line__icon img { width: 100%; height: 100%; object-fit: cover; display: block; }

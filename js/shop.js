@@ -48,7 +48,7 @@
     const list = activeCat === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeCat);
     grid.innerHTML = list.map((p, i) => `
       <div class="card product" data-reveal data-reveal-delay="${(i % 4) * 60}">
-        <div class="product__media">${p.icon}</div>
+        <div class="product__media"><img src="assets/shop/${p.id}.jpg" alt="${esc(p.name)}" loading="lazy" /></div>
         <span class="product__cat">${esc(p.cat)}</span>
         <h3>${esc(p.name)}</h3>
         <p>${esc(p.desc)}</p>
@@ -65,7 +65,7 @@
   function addToCart(id) {
     const product = PRODUCTS.find((p) => p.id === id);
     if (!product) return;
-    TAGDB.Cart.add(product);
+    TAGDB.Cart.add(Object.assign({}, product, { img: "assets/shop/" + product.id + ".jpg" }));
     if (window.updateCartBadge) updateCartBadge();
     renderCart();
     toast(product.name + " added to cart", "success");
@@ -90,7 +90,7 @@
     }
     body.innerHTML = items.map((i) => `
       <div class="cart-line">
-        <div class="cart-line__icon">${i.icon || "📦"}</div>
+        <div class="cart-line__icon">${i.img ? `<img src="${esc(i.img)}" alt="" />` : (i.icon || "📦")}</div>
         <div class="cart-line__info">
           <b>${esc(i.name)}</b>
           <span>${money(i.price)} each</span>
