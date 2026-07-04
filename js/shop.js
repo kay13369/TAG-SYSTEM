@@ -30,17 +30,10 @@
   const yr = $("#year");
   if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ---------- guests: hide cart, show a sign-in note ---------- */
+  /* ---------- guests: hide the cart toggle (they can't check out) ---------- */
   if (!canShop) {
     const cartToggle = $("#cartToggle");
     if (cartToggle) cartToggle.style.display = "none";
-    const head = document.querySelector(".page-head .container");
-    if (head) {
-      const note = document.createElement("p");
-      note.className = "shop-guest-note";
-      note.innerHTML = '🔒 <a href="login.html">Sign in</a> as a client to add items to your cart and place orders.';
-      head.appendChild(note);
-    }
   }
 
   /* ---------- render filters ---------- */
