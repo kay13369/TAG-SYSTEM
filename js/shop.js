@@ -23,9 +23,25 @@
 
   const money = (n) => "P" + Number(n).toLocaleString("en-US");
 
+  // The cart & ordering are for signed-in clients only.
+  const canShop = !!TAGDB.Auth.current();
+
   /* ---------- year in footer ---------- */
   const yr = $("#year");
   if (yr) yr.textContent = new Date().getFullYear();
+
+  /* ---------- guests: hide cart, show a sign-in note ---------- */
+  if (!canShop) {
+    const cartToggle = $("#cartToggle");
+    if (cartToggle) cartToggle.style.display = "none";
+    const head = document.querySelector(".page-head .container");
+    if (head) {
+      const note = document.createElement("p");
+      note.className = "shop-guest-note";
+      note.innerHTML = '🔒 <a href="login.html">Sign in</a> as a client to add items to your cart and place orders.';
+      head.appendChild(note);
+    }
+  }
 
   /* ---------- render filters ---------- */
   const filters = $("#shopFilters");
@@ -51,7 +67,9 @@
         <p>${esc(p.desc)}</p>
         <div class="product__foot">
           <span class="product__price">${money(p.price)}</span>
-          <button class="btn btn-primary btn-sm" data-add="${p.id}">Add to cart</button>
+          ${canShop
+            ? `<button class="btn btn-primary btn-sm" data-add="${p.id}">Add to cart</button>`
+            : `<a class="btn btn-ghost btn-sm" href="login.html">Sign in to order</a>`}
         </div>
       </div>`).join("");
     grid.querySelectorAll("[data-add]").forEach((btn) =>
@@ -60,6 +78,7 @@
   }
 
   function addToCart(id) {
+    if (!TAGDB.Auth.current()) { location.href = "login.html"; return; }
     const product = PRODUCTS.find((p) => p.id === id);
     if (!product) return;
     TAGDB.Cart.add(Object.assign({}, product, { img: "assets/shop/" + product.id + ".jpg" }));

@@ -1245,3 +1245,7 @@ body, body.app-body, body.auth-page {
 /* About page feature image */
 .about-figure { margin-top: 40px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--shadow-lg); }
 .about-figure img { width: 100%; height: clamp(220px, 34vw, 380px); object-fit: cover; display: block; }
+
+/* Shop: sign-in note for guests */
+.shop-guest-note { margin-top: 16px; font-size: 14px; color: var(--soft-on-dark); }
+.shop-guest-note a { color: var(--cyan-300); font-weight: 700; }
