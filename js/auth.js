@@ -62,8 +62,12 @@
   });
 
   // Clear invalid state on input everywhere
+  // (guard: some inputs — e.g. the "Remember Me" checkbox — aren't inside a .field)
   document.querySelectorAll("input").forEach((el) =>
-    el.addEventListener("input", () => el.closest(".field").classList.remove("invalid"))
+    el.addEventListener("input", () => {
+      const field = el.closest(".field");
+      if (field) field.classList.remove("invalid");
+    })
   );
 
   // ---- Login ----
@@ -75,7 +79,8 @@
     ok = markInvalid(pass, pass.value.length > 0) && ok;
     if (!ok) return;
 
-    const user = TAGDB.Auth.login(email.value.trim(), pass.value);
+    const remember = !!($("#lRemember") && $("#lRemember").checked);
+    const user = TAGDB.Auth.login(email.value.trim(), pass.value, remember);
     if (!user) {
       toast("Incorrect email or password.", "error");
       return;

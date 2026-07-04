@@ -195,8 +195,10 @@
     });
     addEventListener("resize", resize);
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) { cancelAnimationFrame(rafId); }
-      else { rafId = raf(frame); }
+      // Always cancel the pending frame first so we never run two loops at once
+      // (e.g. when the page first loads in a hidden/background tab).
+      cancelAnimationFrame(rafId);
+      if (!document.hidden) rafId = raf(frame);
     });
     resize(); frame();
   }

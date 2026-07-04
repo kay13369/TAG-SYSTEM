@@ -263,9 +263,16 @@
     },
   };
 
-  /* ---------- shopping cart (localStorage) ---------- */
+  /* ---------- shopping cart (localStorage, scoped per user) ----------
+     Each signed-in client gets their own cart key ("tag_cart_<userId>") so
+     carts never leak between accounts sharing a browser. Guests fall back to
+     the base key (they can't check out, but the drawer stays consistent). */
   const Cart = {
-    all: () => read(KEYS.cart, []),
+    key() {
+      const s = readSession();
+      return s ? KEYS.cart + "_" + s.userId : KEYS.cart;
+    },
+    all: () => read(Cart.key(), []),
     count: () => Cart.all().reduce((s, i) => s + i.qty, 0),
     total: () => Cart.all().reduce((s, i) => s + i.price * i.qty, 0),
     add(product) {
@@ -273,18 +280,18 @@
       const ex = c.find((i) => i.id === product.id);
       if (ex) ex.qty += 1;
       else c.push({ id: product.id, name: product.name, price: product.price, icon: product.icon || "📦", img: product.img || null, qty: 1 });
-      write(KEYS.cart, c);
+      write(Cart.key(), c);
       return c;
     },
     setQty(id, qty) {
       let c = Cart.all();
       if (qty <= 0) c = c.filter((i) => i.id !== id);
       else { const it = c.find((i) => i.id === id); if (it) it.qty = qty; }
-      write(KEYS.cart, c);
+      write(Cart.key(), c);
       return c;
     },
     remove(id) { return Cart.setQty(id, 0); },
-    clear() { write(KEYS.cart, []); },
+    clear() { write(Cart.key(), []); },
   };
 
   /* ---------- orders ---------- */
@@ -309,12 +316,35 @@
     },
   };
 
+  /* ---------- session storage ----------
+     A "remembered" session persists in localStorage (survives closing the
+     browser); an un-remembered one lives in sessionStorage (this tab only). */
+  function readSession() {
+    try {
+      const raw =
+        localStorage.getItem(KEYS.session) || sessionStorage.getItem(KEYS.session);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  function writeSession(value, remember) {
+    const store = remember ? localStorage : sessionStorage;
+    const other = remember ? sessionStorage : localStorage;
+    other.removeItem(KEYS.session);
+    store.setItem(KEYS.session, JSON.stringify(value));
+  }
+  function clearSession() {
+    localStorage.removeItem(KEYS.session);
+    sessionStorage.removeItem(KEYS.session);
+  }
+
   /* ---------- auth / session ---------- */
   const Auth = {
-    login(email, password) {
+    login(email, password, remember) {
       const user = Users.byEmail(email);
       if (!user || user.password !== password) return null;
-      write(KEYS.session, { userId: user.id, role: user.role });
+      writeSession({ userId: user.id, role: user.role }, remember !== false);
       return user;
     },
     register(data) {
@@ -322,14 +352,14 @@
         return { error: "An account with that email already exists." };
       }
       const user = Users.create({ ...data, role: "client" });
-      write(KEYS.session, { userId: user.id, role: user.role });
+      writeSession({ userId: user.id, role: user.role }, true);
       return { user };
     },
     logout() {
-      localStorage.removeItem(KEYS.session);
+      clearSession();
     },
     current() {
-      const s = read(KEYS.session, null);
+      const s = readSession();
       return s ? Users.byId(s.userId) : null;
     },
     /** Redirects to login if not authed (or wrong role). Returns the user. */
@@ -358,8 +388,16 @@
     now,
     /** wipe everything and re-seed (used by the demo "reset" button) */
     reset() {
+      const sess = readSession();
       Object.values(KEYS).forEach((k) => localStorage.removeItem(k));
+      // also clear any per-user carts ("tag_cart_<userId>")
+      Object.keys(localStorage)
+        .filter((k) => k.indexOf(KEYS.cart + "_") === 0)
+        .forEach((k) => localStorage.removeItem(k));
+      clearSession();
       seed();
+      // keep the current user (the admin) signed in if their account survives
+      if (sess && Users.byId(sess.userId)) writeSession(sess, true);
     },
   };
 
