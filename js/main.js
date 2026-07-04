@@ -19,6 +19,16 @@
   };
   window.updateCartBadge();
 
+  // Login-aware nav: signed-in users get "My Portal" instead of "Client Login"
+  (function () {
+    const user = window.TAGDB && TAGDB.Auth.current();
+    const link = document.querySelector('.nav__actions a[href="login.html"]');
+    if (user && link) {
+      link.textContent = "My Portal";
+      link.setAttribute("href", user.role === "admin" ? "admin.html" : "portal.html");
+    }
+  })();
+
   // Mobile nav toggle
   const nav = $("#nav");
   const toggle = $("#navToggle");

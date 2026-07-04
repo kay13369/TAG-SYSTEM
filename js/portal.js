@@ -54,7 +54,12 @@
   }
 
   $$("#sideNav a").forEach((a) =>
-    a.addEventListener("click", (e) => { e.preventDefault(); navigate(a.dataset.view); })
+    a.addEventListener("click", (e) => {
+      // links with a real href (e.g. the Shop page) navigate normally
+      if (!a.dataset.view) return;
+      e.preventDefault();
+      navigate(a.dataset.view);
+    })
   );
 
   // ---- Views ----
