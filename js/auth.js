@@ -117,8 +117,17 @@
       toast(result.error, "error");
       return;
     }
-    toast("Account created — welcome to TAG!", "success");
-    setTimeout(() => go(result.user), 500);
+
+    // Account created but NOT signed in — send them to the login form to sign in.
+    const newEmail = email.value.trim();
+    $("#registerForm").reset();
+    if (pwMeter) { pwMeter.setAttribute("data-score", "0"); if (pwLabel) pwLabel.textContent = PW_LABELS[0]; }
+    registerView.style.display = "none";
+    loginView.style.display = "block";
+    const lEmail = $("#lEmail"), lPass = $("#lPass");
+    if (lEmail) lEmail.value = newEmail;
+    if (lPass) { lPass.value = ""; lPass.focus(); }
+    toast("Account created — please sign in.", "success");
   });
 
   // ---- Live password-strength meter ----

@@ -351,8 +351,8 @@
       if (Users.byEmail(data.email)) {
         return { error: "An account with that email already exists." };
       }
+      // Create the account but do NOT sign in — the user must log in afterwards.
       const user = Users.create({ ...data, role: "client" });
-      writeSession({ userId: user.id, role: user.role }, true);
       return { user };
     },
     logout() {
