@@ -146,6 +146,12 @@ h1, h2, h3, h4 { line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; c
 .nav__actions { display: flex; align-items: center; gap: 12px; }
 .nav__toggle { display: none; background: none; border: none; padding: 8px; }
 .nav__toggle span { display: block; width: 24px; height: 2.5px; background: var(--ink); border-radius: 2px; margin: 5px 0; transition: .2s; }
+/* Social icons in the nav */
+.nav__social { display: flex; align-items: center; gap: 2px; }
+.nav__social a { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; color: var(--soft-on-dark); transition: color .15s, background .15s, transform .15s; }
+.nav__social a svg { width: 17px; height: 17px; fill: currentColor; display: block; }
+.nav__social a:hover { color: var(--cyan-300); background: rgba(0,194,203,0.14); transform: translateY(-2px); }
+.nav__divider { width: 1px; height: 22px; background: rgba(255,255,255,0.16); margin: 0 6px; flex: 0 0 auto; }
 
 /* Hero */
 .hero { position: relative; background: var(--grad-hero); color: #fff; overflow: hidden; }
@@ -431,6 +437,7 @@ h1, h2, h3, h4 { line-height: 1.18; font-weight: 800; letter-spacing: -0.02em; c
   .sidebar.open { transform: translateX(0); }
   .nav__links { display: none; }
   .nav__toggle { display: block; }
+  .nav__social, .nav__divider { display: none; }
   .nav.open .nav__links { display: flex; position: absolute; top: 72px; left: 0; right: 0; flex-direction: column; background: #fff; padding: 20px 24px; gap: 16px; border-bottom: 1px solid var(--slate-200); box-shadow: var(--shadow-md); }
 }
 @media (max-width: 560px) {
@@ -985,8 +992,9 @@ body, body.app-body, body.auth-page {
     background: transparent; box-shadow: none; border: none; padding: 12px 0 4px;
   }
   .nav.open .nav__links a { padding: 9px 2px; }
-  .nav.open .nav__actions { display: flex; gap: 10px; padding: 4px 0 12px; }
+  .nav.open .nav__actions { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 0 12px; }
   .nav.open .nav__actions .btn { flex: 1; }
+  .nav.open .nav__social { display: flex; order: -1; flex-basis: 100%; justify-content: center; gap: 6px; margin-bottom: 2px; }
 
   /* ---- HERO ---- */
   .hero__inner { padding: 52px 16px 60px; gap: 28px; } /* 16px gutters (this element overrides .container padding) */
