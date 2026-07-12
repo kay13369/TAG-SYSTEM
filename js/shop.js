@@ -5,17 +5,19 @@
   "use strict";
   const { $, $$, esc, toast, modal } = UI;
 
-  /* ---------- product catalogue (prices in BWP) ---------- */
+  /* ---------- product catalogue (prices in BWP) ----------
+     Models were read from the product boxes; prices below are estimates —
+     confirm/adjust with real retail pricing. */
   const PRODUCTS = [
-    { id: "hpe-server", name: "HPE ProLiant Server", cat: "Hardware", icon: "🖥️", price: 45000, desc: "Enterprise rack server for virtualisation and business-critical workloads." },
-    { id: "biz-laptop", name: "HP Business Laptop", cat: "Hardware", icon: "💻", price: 8500, desc: "14\" business laptop, i7 / 16GB / 512GB SSD, with 3-year warranty." },
-    { id: "nas-8tb", name: "Backup NAS · 8TB", cat: "Hardware", icon: "💾", price: 7500, desc: "Network-attached storage for automated, tested backups and recovery." },
-    { id: "ups-1500", name: "UPS 1500VA", cat: "Hardware", icon: "🔋", price: 1500, desc: "Line-interactive UPS to keep critical systems online through outages." },
-    { id: "wifi-ap", name: "Wi-Fi 6 Access Point", cat: "Networking", icon: "📶", price: 2200, desc: "High-density access point for seamless office and warehouse coverage." },
-    { id: "switch-24", name: "24-Port Managed Switch", cat: "Networking", icon: "🔌", price: 4200, desc: "Gigabit managed switch with VLAN and PoE for scalable networks." },
-    { id: "vc-bar", name: "Video Conferencing Bar", cat: "Networking", icon: "🎥", price: 12000, desc: "All-in-one 4K camera, mic and speaker bar for hybrid boardrooms." },
-    { id: "access-kit", name: "Biometric Access Control Kit", cat: "Security", icon: "🔐", price: 6500, desc: "Fingerprint + card door controller with management software." },
-    { id: "ip-camera", name: "IP CCTV Camera", cat: "Security", icon: "📹", price: 1800, desc: "4MP IP camera with night vision and 30-day cloud retention option." },
+    { id: "unifi-u6-plus", name: "Ubiquiti UniFi U6+ Access Point", cat: "Networking", price: 2200,
+      img: "assets/shop_images/unifi-u6-plus.jpeg",
+      desc: "Wi-Fi 6 ceiling access point (model U6+) for fast, high-density office and warehouse coverage." },
+    { id: "4g-cpe-router", name: "4G/5G CPE Wi-Fi Router", cat: "Networking", price: 1200,
+      img: "assets/shop_images/4g-cpe-router.jpeg",
+      desc: "LTE Cat4 4G/5G CPE router — up to 300Mbps, 32 Wi-Fi clients, and external antennas for stronger signal." },
+    { id: "universal-laptop-adapter", name: "Universal Laptop Adapter · 120W", cat: "Accessories", price: 350,
+      img: "assets/shop_images/universal-laptop-adapter.jpeg",
+      desc: "120W universal laptop charger (AC 110–240V to DC 12–24V) with 8 interchangeable tips for most notebook brands." },
   ];
 
   const CATS = ["All"].concat(PRODUCTS.map((p) => p.cat).filter((c, i, a) => a.indexOf(c) === i));
@@ -54,7 +56,7 @@
     const list = activeCat === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.cat === activeCat);
     grid.innerHTML = list.map((p, i) => `
       <div class="card product" data-reveal data-reveal-delay="${(i % 4) * 60}">
-        <div class="product__media"><img src="assets/shop/${p.id}.jpg" alt="${esc(p.name)}" loading="lazy" /></div>
+        <div class="product__media"><img src="${p.img}" alt="${esc(p.name)}" loading="lazy" /></div>
         <span class="product__cat">${esc(p.cat)}</span>
         <h3>${esc(p.name)}</h3>
         <p>${esc(p.desc)}</p>
@@ -74,7 +76,7 @@
     if (!TAGDB.Auth.current()) { location.href = "login.html"; return; }
     const product = PRODUCTS.find((p) => p.id === id);
     if (!product) return;
-    TAGDB.Cart.add(Object.assign({}, product, { img: "assets/shop/" + product.id + ".jpg" }));
+    TAGDB.Cart.add(product);
     if (window.updateCartBadge) updateCartBadge();
     renderCart();
     toast(product.name + " added to cart", "success");
